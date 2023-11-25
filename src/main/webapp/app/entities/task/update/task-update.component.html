@@ -1,0 +1,201 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-task-heading" data-cy="TaskCreateUpdateHeading">Create or edit a Task</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_priority">Priority</label>
+          <select class="form-control" name="priority" formControlName="priority" id="field_priority" data-cy="priority">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let priority of priorityValues" [value]="priority">{{ priority }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startDateTime">Start Date Time</label>
+          <div class="d-flex">
+            <input
+              id="field_startDateTime"
+              data-cy="startDateTime"
+              type="datetime-local"
+              class="form-control"
+              name="startDateTime"
+              formControlName="startDateTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('startDateTime')!.invalid && (editForm.get('startDateTime')!.dirty || editForm.get('startDateTime')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('startDateTime')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+            <small class="form-text text-danger" [hidden]="!editForm.get('startDateTime')?.errors?.datetimelocal"
+              >Translation missing for entity.validation.datetimelocal</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDateTime">End Date Time</label>
+          <div class="d-flex">
+            <input
+              id="field_endDateTime"
+              data-cy="endDateTime"
+              type="datetime-local"
+              class="form-control"
+              name="endDateTime"
+              formControlName="endDateTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('endDateTime')!.invalid && (editForm.get('endDateTime')!.dirty || editForm.get('endDateTime')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('endDateTime')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+            <small class="form-text text-danger" [hidden]="!editForm.get('endDateTime')?.errors?.datetimelocal"
+              >Translation missing for entity.validation.datetimelocal</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
+          </select>
+          <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('status')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dueDate">Due Date</label>
+          <div class="input-group">
+            <input
+              id="field_dueDate"
+              data-cy="dueDate"
+              type="text"
+              class="form-control"
+              name="dueDate"
+              ngbDatepicker
+              #dueDateDp="ngbDatepicker"
+              formControlName="dueDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+          <div *ngIf="editForm.get('dueDate')!.invalid && (editForm.get('dueDate')!.dirty || editForm.get('dueDate')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('dueDate')?.errors?.required"
+              >Translation missing for entity.validation.required</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_attachment">Attachment</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('attachmentContentType')!.value + ';base64,' + editForm.get('attachment')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('attachment')!.value"
+              alt="task image"
+            />
+            <div *ngIf="editForm.get('attachment')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('attachmentContentType')!.value }}, {{ byteSize(editForm.get('attachment')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('attachment', 'attachmentContentType', 'file_attachment')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_attachment"
+              data-cy="attachment"
+              (change)="setFileData($event, 'attachment', true)"
+              accept="image/*"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="attachment"
+            id="field_attachment"
+            data-cy="attachment"
+            formControlName="attachment"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="attachmentContentType"
+            id="field_attachmentContentType"
+            formControlName="attachmentContentType"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Translation missing for entity.action.cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Translation missing for entity.action.save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

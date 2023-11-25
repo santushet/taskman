@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="task">
+      <h2 data-cy="taskDetailsHeading"><span>Task</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>Translation missing for global.field.id</span></dt>
+        <dd>
+          <span>{{ task.id }}</span>
+        </dd>
+        <dt><span>Title</span></dt>
+        <dd>
+          <span>{{ task.title }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ task.description }}</span>
+        </dd>
+        <dt><span>Priority</span></dt>
+        <dd>
+          <span>{{ task.priority }}</span>
+        </dd>
+        <dt><span>Start Date Time</span></dt>
+        <dd>
+          <span>{{ task.startDateTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>End Date Time</span></dt>
+        <dd>
+          <span>{{ task.endDateTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <span>{{ task.status }}</span>
+        </dd>
+        <dt><span>Due Date</span></dt>
+        <dd>
+          <span>{{ task.dueDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Attachment</span></dt>
+        <dd>
+          <div *ngIf="task.attachment">
+            <a (click)="openFile(task.attachment, task.attachmentContentType)">
+              <img [src]="'data:' + task.attachmentContentType + ';base64,' + task.attachment" style="max-width: 100%" alt="task image" />
+            </a>
+            {{ task.attachmentContentType }}, {{ byteSize(task.attachment) }}
+          </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ task.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Translation missing for entity.action.back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Translation missing for entity.action.edit</span>
+      </button>
+    </div>
+  </div>
+</div>
