@@ -17,12 +17,13 @@ import { status } from 'app/entities/enumerations/status.model';
 import { TaskService } from '../service/task.service';
 import { ITask } from '../task.model';
 import { TaskFormService, TaskFormGroup } from './task-form.service';
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 
 @Component({
   standalone: true,
   selector: 'jhi-task-update',
   templateUrl: './task-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, HasAnyAuthorityDirective],
 })
 export class TaskUpdateComponent implements OnInit {
   isSaving = false;

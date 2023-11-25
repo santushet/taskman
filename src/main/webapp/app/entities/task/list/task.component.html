@@ -121,17 +121,23 @@
             <div class="btn-group">
               <a [routerLink]="['/task', task.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">Translation missing for entity.action.view</span>
+                <span class="d-none d-md-inline">View</span>
               </a>
 
               <a [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Translation missing for entity.action.edit</span>
+                <span class="d-none d-md-inline">Edit</span>
               </a>
 
-              <button type="submit" (click)="delete(task)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
+                type="submit"
+                (click)="delete(task)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Translation missing for entity.action.delete</span>
+                <span class="d-none d-md-inline">Delete</span>
               </button>
             </div>
           </td>

@@ -17,7 +17,7 @@ import LoginComponent from './login/login.component';
         {
           path: '',
           component: HomeComponent,
-          title: 'Welcome, Java Hipster!',
+          title: 'Welcome, Task Manager',
         },
         {
           path: '',
