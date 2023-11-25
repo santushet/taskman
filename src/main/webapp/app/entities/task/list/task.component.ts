@@ -13,6 +13,7 @@ import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/co
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { ITask } from '../task.model';
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 
 import { EntityArrayResponseType, TaskService } from '../service/task.service';
 import { TaskDeleteDialogComponent } from '../delete/task-delete-dialog.component';
@@ -31,6 +32,7 @@ import { TaskDeleteDialogComponent } from '../delete/task-delete-dialog.componen
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
     ItemCountComponent,
+    HasAnyAuthorityDirective,
   ],
 })
 export class TaskComponent implements OnInit {
