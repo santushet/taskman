@@ -2,6 +2,7 @@ package com.tm.app.web.rest;
 
 import com.tm.app.domain.Task;
 import com.tm.app.repository.TaskRepository;
+import com.tm.app.security.SecurityUtils;
 import com.tm.app.service.TaskService;
 import com.tm.app.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -55,10 +57,13 @@ public class TaskResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) throws URISyntaxException {
+    public ResponseEntity<?> createTask(@Valid @RequestBody Task task) throws URISyntaxException {
         log.debug("REST request to save Task : {}", task);
         if (task.getId() != null) {
             throw new BadRequestAlertException("A new task cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if (task.getUser() != null && !(SecurityUtils.hasCurrentUserAnyOfAuthorities("ROLE_ADMIN", "ROLE_MANAGER"))) {
+            return new ResponseEntity<>("error.http.403", HttpStatus.FORBIDDEN);
         }
         Task result = taskService.save(task);
         return ResponseEntity
@@ -78,12 +83,15 @@ public class TaskResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Task task)
-        throws URISyntaxException {
+    public ResponseEntity<?> updateTask(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Task task) {
         log.debug("REST request to update Task : {}, {}", id, task);
         if (task.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        if (task.getUser() != null && !task.getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(""))) {
+            return new ResponseEntity<>("error.http.403", HttpStatus.FORBIDDEN);
+        }
+
         if (!Objects.equals(id, task.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
@@ -152,7 +160,7 @@ public class TaskResource {
         if (eagerload) {
             page = taskService.findAllWithEagerRelationships(pageable);
         } else {
-            page = taskService.findAll(pageable);
+            page = taskRepository.findAllWithToOneRelationships(pageable);
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
@@ -165,9 +173,17 @@ public class TaskResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the task, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTask(@PathVariable Long id) {
+    public ResponseEntity<?> getTask(@PathVariable Long id) {
         log.debug("REST request to get Task : {}", id);
         Optional<Task> task = taskService.findOne(id);
+        if (
+            task.isPresent() &&
+            task.get().getUser() != null &&
+            !task.get().getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(""))
+        ) {
+            return new ResponseEntity<>("error.http.403", HttpStatus.FORBIDDEN);
+        }
+
         return ResponseUtil.wrapOrNotFound(task);
     }
 
@@ -178,8 +194,17 @@ public class TaskResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+    public ResponseEntity<?> deleteTask(@PathVariable Long id) {
         log.debug("REST request to delete Task : {}", id);
+        Optional<Task> task = taskRepository.findById(id);
+        if (
+            task.isPresent() &&
+            task.get().getUser() != null &&
+            !task.get().getUser().getLogin().equals(SecurityUtils.getCurrentUserLogin().orElse(""))
+        ) {
+            return new ResponseEntity<>("error.http.403", HttpStatus.FORBIDDEN);
+        }
+
         taskService.delete(id);
         return ResponseEntity
             .noContent()
