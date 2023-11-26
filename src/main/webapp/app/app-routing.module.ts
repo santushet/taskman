@@ -17,7 +17,7 @@ import LoginComponent from './login/login.component';
         {
           path: '',
           component: HomeComponent,
-          title: 'Welcome, Task Manager',
+          title: 'Welcome to Task Manager',
         },
         {
           path: '',
