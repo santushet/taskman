@@ -1,6 +1,6 @@
-type NavbarItem = {
-  name: string;
-  route: string;
-};
+// type NavbarItem = {
+//   name: string;
+//   route: string;
+// };
 
-export default NavbarItem;
+// export default NavbarItem;

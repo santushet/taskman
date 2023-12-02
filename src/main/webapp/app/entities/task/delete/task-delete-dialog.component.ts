@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
@@ -17,16 +17,16 @@ export class TaskDeleteDialogComponent {
 
   constructor(
     protected taskService: TaskService,
-    protected activeModal: NgbActiveModal,
+    // protected activeModal: NgbActiveModal,
   ) {}
 
   cancel(): void {
-    this.activeModal.dismiss();
+    // this.activeModal.dismiss();
   }
 
   confirmDelete(id: number): void {
     this.taskService.delete(id).subscribe(() => {
-      this.activeModal.close(ITEM_DELETED_EVENT);
+      // this.activeModal.close(ITEM_DELETED_EVENT);
     });
   }
 }

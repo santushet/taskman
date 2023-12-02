@@ -15,11 +15,12 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
     "target": "es2022",
-    "module": "es2020",
+    "module": "es2022",
     "types": [],
-    "lib": ["es2018", "es2020", "dom"]
+    "lib": ["es2018", "es2022", "dom"]
   },
   "references": [
     {

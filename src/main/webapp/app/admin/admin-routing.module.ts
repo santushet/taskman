@@ -11,31 +11,31 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./user-management/user-management.route'),
         title: 'Users',
       },
-      {
-        path: 'docs',
-        loadComponent: () => import('./docs/docs.component'),
-        title: 'API',
-      },
-      {
-        path: 'configuration',
-        loadComponent: () => import('./configuration/configuration.component'),
-        title: 'Configuration',
-      },
-      {
-        path: 'health',
-        loadComponent: () => import('./health/health.component'),
-        title: 'Health Checks',
-      },
-      {
-        path: 'logs',
-        loadComponent: () => import('./logs/logs.component'),
-        title: 'Logs',
-      },
-      {
-        path: 'metrics',
-        loadComponent: () => import('./metrics/metrics.component'),
-        title: 'Application Metrics',
-      },
+      // {
+      //   path: 'docs',
+      //   loadComponent: () => import('./docs/docs.component'),
+      //   title: 'API',
+      // },
+      // {
+      //   path: 'configuration',
+      //   loadComponent: () => import('./configuration/configuration.component'),
+      //   title: 'Configuration',
+      // },
+      // {
+      //   path: 'health',
+      //   loadComponent: () => import('./health/health.component'),
+      //   title: 'Health Checks',
+      // },
+      // {
+      //   path: 'logs',
+      //   loadComponent: () => import('./logs/logs.component'),
+      //   title: 'Logs',
+      // },
+      // {
+      //   path: 'metrics',
+      //   loadComponent: () => import('./metrics/metrics.component'),
+      //   title: 'Application Metrics',
+      // },
       /* jhipster-needle-add-admin-route - JHipster will add admin routes here */
     ]),
   ],

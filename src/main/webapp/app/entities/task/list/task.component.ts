@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { SortDirective, SortByDirective } from 'app/shared/sort';
@@ -51,7 +51,7 @@ export class TaskComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal,
+    // protected modalService: NgbModal,
   ) {}
 
   trackId = (_index: number, item: ITask): number => this.taskService.getTaskIdentifier(item);
@@ -69,19 +69,19 @@ export class TaskComponent implements OnInit {
   }
 
   delete(task: ITask): void {
-    const modalRef = this.modalService.open(TaskDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.task = task;
-    // unsubscribe not needed because closed completes on modal close
-    modalRef.closed
-      .pipe(
-        filter(reason => reason === ITEM_DELETED_EVENT),
-        switchMap(() => this.loadFromBackendWithRouteInformations()),
-      )
-      .subscribe({
-        next: (res: EntityArrayResponseType) => {
-          this.onResponseSuccess(res);
-        },
-      });
+    // const modalRef = this.modalService.open(TaskDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.task = task;
+    // // unsubscribe not needed because closed completes on modal close
+    // modalRef.closed
+    //   .pipe(
+    //     filter(reason => reason === ITEM_DELETED_EVENT),
+    //     switchMap(() => this.loadFromBackendWithRouteInformations()),
+    //   )
+    //   .subscribe({
+    //     next: (res: EntityArrayResponseType) => {
+    //       this.onResponseSuccess(res);
+    //     },
+    //   });
   }
 
   load(): void {

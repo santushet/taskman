@@ -5,7 +5,7 @@ import { AppPageTitleStrategy } from 'app/app-page-title-strategy';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'jhi-main',
+  selector: 'app-root',
   templateUrl: './main.component.html',
   providers: [AppPageTitleStrategy],
 })
