@@ -1,33 +1,50 @@
 import { Component } from '@angular/core';
-import { CustomizerSettingsService } from '../../customizer-settings/customizer-settings.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { PasswordResetFinishService } from './password-reset-finish.service';
+
+// import { CustomizerSettingsService } from '../../customizer-settings/customizer-settings.service';
 
 @Component({
-    selector: 'app-reset-password',
-    templateUrl: './reset-password.component.html',
-    styleUrls: ['./reset-password.component.scss']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent {
+  hide = true;
 
-    hide = true;
+  initialized = false;
+  doNotMatch = false;
+  error = false;
+  success = false;
+  key = '';
 
-    constructor(
-        public themeService: CustomizerSettingsService
-    ) {}
+  passwordForm = new FormGroup({
+    newPassword: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+    }),
+    confirmPassword: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+    }),
+  });
 
-    toggleTheme() {
-        this.themeService.toggleTheme();
+  constructor(private passwordResetFinishService: PasswordResetFinishService) {}
+
+  finishReset(): void {
+    this.doNotMatch = false;
+    this.error = false;
+
+    const { newPassword, confirmPassword } = this.passwordForm.getRawValue();
+
+    if (newPassword !== confirmPassword) {
+      this.doNotMatch = true;
+    } else {
+      this.passwordResetFinishService.save(this.key, newPassword).subscribe({
+        next: () => (this.success = true),
+        error: () => (this.error = true),
+      });
     }
-
-    toggleCardBorderTheme() {
-        this.themeService.toggleCardBorderTheme();
-    }
-
-    toggleCardBorderRadiusTheme() {
-        this.themeService.toggleCardBorderRadiusTheme();
-    }
-
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
-
+  }
 }
