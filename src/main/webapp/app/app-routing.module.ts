@@ -186,6 +186,7 @@ import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.
         },
         { path: 'authentication/reset-password', component: ResetPasswordComponent },
         { path: 'authentication/forgot-password', component: ForgotPasswordComponent },
+        { path: 'to-do-list', component: ToDoListComponent },
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(({ EntityRoutingModule }) => EntityRoutingModule),

@@ -1,265 +1,98 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import dayjs from 'dayjs/esm';
+import { priority } from 'app/entities/enumerations/priority.model';
+import { status } from 'app/entities/enumerations/status.model';
+import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { FormatMediumDatetimePipe, FormatMediumDatePipe } from 'app/shared/date';
 
-
+import { EntityArrayResponseType, TaskService } from './task.service';
+import { ITask } from './task.model';
 
 @Component({
-    selector: 'app-to-do-list',
-    templateUrl: './to-do-list.component.html',
-    styleUrls: ['./to-do-list.component.scss']
+  selector: 'app-to-do-list',
+  templateUrl: './to-do-list.component.html',
+  styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent {
+  // openAddTaskDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  //     this.dialog.open(AddTaskDialogBox, {
+  //         width: '600px',
+  //         enterAnimationDuration,
+  //         exitAnimationDuration
+  //     });
+  // }
 
-    constructor(
-        public dialog: MatDialog
-    ) {}
+  ongoing = true;
+  pending = true;
+  completed = true;
 
-    openAddTaskDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.dialog.open(AddTaskDialogBox, {
-            width: '600px',
-            enterAnimationDuration,
-            exitAnimationDuration
-        });
-    }
+  tasks?: ITask[];
+  isLoading = false;
 
-    displayedColumns: string[] = ['taskName', 'assigned', 'deadline', 'status', 'completion', 'priority', 'action'];
-    dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource: any;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(
+    protected taskService: TaskService,
+    public dialog: MatDialog,
+  ) {}
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-    }
+  ngOnInit(): void {
+    this.load();
+  }
 
-    ongoing = true;
-    pending = true;
-    completed = true;
+  load(): void {
+    this.queryBackend().subscribe({
+      next: (res: EntityArrayResponseType) => {
+        this.onResponseSuccess(res);
+      },
+    });
+  }
 
+  protected fillComponentAttributesFromResponseBody(data: ITask[] | null): ITask[] {
+    return data ?? [];
+  }
+
+  protected onResponseSuccess(response: EntityArrayResponseType): void {
+    // this.fillComponentAttributesFromResponseHeader(response.headers);
+    const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
+    // console.log(dataFromBody[0].user.login);
+    this.tasks = dataFromBody;
+    this.dataSource = new MatTableDataSource<ITask>(this.tasks);
+  }
+
+  protected queryBackend(page?: number, predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
+    this.isLoading = true;
+    const pageToLoad: number = page ?? 1;
+    const queryObject: any = {
+      eagerload: true,
+    };
+    return this.taskService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+  }
+
+  displayedColumns: string[] = ['title', 'priority', 'status', 'dueDate', 'user', 'action'];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 }
 
-export interface PeriodicElement {
-    deadline: string;
-    assigned: any;
-    taskName: string;
-    completion: string;
-    priority: string;
-    action: string;
-    status: any;
-}
+// @Component({
+//     selector: 'add-task-dialog',
+//     templateUrl: './add-task-dialog.html',
+// })
+// export class AddTaskDialogBox {
 
-const ELEMENT_DATA: PeriodicElement[] = [
-    {
-        taskName: 'Public Beta Release',
-        deadline: '14 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user23.jpg',
-            name: 'James Andy'
-        },
-        status: {
-            ongoing: 'Ongoing'
-        },
-        completion: '10/10',
-        priority: 'High',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Fix Platform Errors',
-        deadline: '12 Feb 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user22.jpg',
-            name: 'Alina Smith'
-        },
-        status: {
-            completed: 'Completed'
-        },
-        completion: '9/10',
-        priority: 'Low',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Launch our Mobile App',
-        deadline: '10 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user21.jpg',
-            name: 'David Warner'
-        },
-        status: {
-            ongoing: 'Ongoing'
-        },
-        completion: '8/10',
-        priority: 'High',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Add the New Pricing Page',
-        deadline: '08 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user20.jpg',
-            name: 'Steven Smith'
-        },
-        status: {
-            ongoing: 'Ongoing'
-        },
-        completion: '7/10',
-        priority: 'Medium',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Redesign New Online Shop',
-        deadline: '01 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user19.jpg',
-            name: 'Shane Cloud'
-        },
-        status: {
-            pending: 'Pending'
-        },
-        completion: '6/10',
-        priority: 'Low',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Material Ui Design',
-        deadline: '03 Apr 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user18.jpg',
-            name: 'Olivia Lucy'
-        },
-        status: {
-            pending: 'Pending'
-        },
-        completion: '5/10',
-        priority: 'High',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Add Progress Track',
-        deadline: '12 Feb 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user17.jpg',
-            name: 'Liam Payne'
-        },
-        status: {
-            completed: 'Completed'
-        },
-        completion: '4/10',
-        priority: 'Medium',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Project for Client',
-        deadline: '14 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user16.jpg',
-            name: 'David Warner'
-        },
-        status: {
-            ongoing: 'Ongoing'
-        },
-        completion: '3/10',
-        priority: 'Low',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Opened New Showcase',
-        deadline: '28 Feb 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user15.jpg',
-            name: 'Alina Smith'
-        },
-        status: {
-            completed: 'Completed'
-        },
-        completion: '2/10',
-        priority: 'High',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Updated the Status',
-        deadline: '10 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user14.jpg',
-            name: 'James Andy'
-        },
-        status: {
-            completed: 'Completed'
-        },
-        completion: '1/10',
-        priority: 'Medium',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Product UI/UX Design',
-        deadline: '08 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user13.jpg',
-            name: 'Liam Payne'
-        },
-        status: {
-            ongoing: 'Ongoing'
-        },
-        completion: '10/10',
-        priority: 'Low',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'Product Devlopment',
-        deadline: '28 Feb 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user12.jpg',
-            name: 'Olivia Lucy'
-        },
-        status: {
-            pending: 'Pending'
-        },
-        completion: '9/10',
-        priority: 'High',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'New Office Building',
-        deadline: '03 Apr 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user11.jpg',
-            name: 'Shane Cloud'
-        },
-        status: {
-            ongoing: 'Ongoing'
-        },
-        completion: '8/10',
-        priority: 'Medium',
-        action: 'ri-more-fill'
-    },
-    {
-        taskName: 'SEO Marketing',
-        deadline: '01 Mar 2023',
-        assigned: {
-            img: 'main/webapp/assets/img/user/user10.jpg',
-            name: 'Steven Smith'
-        },
-        status: {
-            pending: 'Pending'
-        },
-        completion: '7/10',
-        priority: 'Low',
-        action: 'ri-more-fill'
-    }
-];
+//     constructor(
+//         public dialogRef: MatDialogRef<AddTaskDialogBox>
+//     ) {}
 
-@Component({
-    selector: 'add-task-dialog',
-    templateUrl: './add-task-dialog.html',
-})
-export class AddTaskDialogBox {
+//     close(){
+//         this.dialogRef.close(true);
+//     }
 
-    constructor(
-        public dialogRef: MatDialogRef<AddTaskDialogBox>
-    ) {}
-
-    close(){
-        this.dialogRef.close(true);
-    }
-
-}
+// }

@@ -1,108 +1,135 @@
 <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
-    <h5 class="mb-0">Tasks</h5>
-    <ol class="breadcrumb mb-0 ps-0">
-        <li class="breadcrumb-item">
-            <a routerLink="/">
-                <i class="ri-home-8-line"></i>
-                Dashboard
-            </a>
-        </li>
-        <li class="breadcrumb-item fw-semibold">Tasks</li>
-    </ol>
+  <h5 class="mb-0">Tasks</h5>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Dashboard
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Tasks</li>
+  </ol>
 </div>
 
 <mat-card class="mb-25 tagus-card">
-    <mat-card-header>
-        <h5 class="mb-0">Tasks</h5>
-        <button mat-flat-button class="default-btn tagus" (click)="openAddTaskDialog('300ms', '100ms')">
-            <i class="ri-add-fill"></i> Add Task
-        </button>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="myTasksTable mat-elevation-z8 tagus-mat-table">
-            <table mat-table [dataSource]="dataSource">
+  <mat-card-header>
+    <h5 class="mb-0">Tasks</h5>
+    <!-- <button mat-flat-button class="default-btn tagus" (click)="openAddTaskDialog('300ms', '100ms')">
+      <i class="ri-add-fill"></i> Add Task
+    </button> -->
+  </mat-card-header>
+  <mat-card-content>
+    <div class="myTasksTable mat-elevation-z8 tagus-mat-table">
+      <table mat-table [dataSource]="dataSource">
+        <!-- Task Name Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef class="text-start">Title</th>
+          <td mat-cell *matCellDef="let element" class="text-start">
+            <div class="d-flex align-items-center name-info">
+              <mat-checkbox></mat-checkbox>
+              <a routerLink="/task-details">
+                {{ element.title }}
+              </a>
+            </div>
+          </td>
+        </ng-container>
 
-                <!-- Task Name Column -->
-                <ng-container matColumnDef="taskName">
-                    <th mat-header-cell *matHeaderCellDef class="text-start">Task Name</th>
-                    <td mat-cell *matCellDef="let element" class="text-start">
-                        <div class="d-flex align-items-center name-info">
-                            <mat-checkbox></mat-checkbox>
-                            <a routerLink="/task-details">
-                                {{element.taskName}}
-                            </a>
-                        </div>
-                    </td>
-                </ng-container>
-
-                <!-- Assigned Column -->
-                <ng-container matColumnDef="assigned">
-                    <th mat-header-cell *matHeaderCellDef>Assigned</th>
+        <!-- Assigned Column -->
+        <!-- <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef>title</th>
                     <td mat-cell *matCellDef="let element">
-                        <img [src]="element.assigned.img" matTooltip="{{element.assigned.name}}" class="rounded-circle" alt="icon">
+                        <img [src]="element.assigned.img" matTooltip="{{element.title}}" class="rounded-circle" alt="icon">
                     </td>
-                </ng-container>
+                </ng-container> -->
 
-                <!-- Deadline Column -->
-                <ng-container matColumnDef="deadline">
-                    <th mat-header-cell *matHeaderCellDef>Deadline</th>
-                    <td mat-cell *matCellDef="let element">{{element.deadline}}</td>
-                </ng-container>
+        <!-- Deadline Column -->
+        <!-- <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef>desc</th>
+                    <td mat-cell *matCellDef="let element">{{element.description}}</td>
+                </ng-container> -->
 
-                <!-- Status Column -->
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef>Status</th>
+        <!-- Status Column -->
+        <ng-container matColumnDef="priority">
+          <th mat-header-cell *matHeaderCellDef>Priority</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="badge fw-medium">{{ element.priority }}</span>
+            <!-- <span class="badge pending fw-medium" *ngIf="element.status.pending">{{element.status.pending}}</span>
+                        <span class="badge completed fw-medium" *ngIf="element.status.completed">{{element.status.completed}}</span> -->
+          </td>
+        </ng-container>
+
+        <!-- Completion Column -->
+        <!-- <ng-container matColumnDef="startDateTime">
+                    <th mat-header-cell *matHeaderCellDef>startDateTime</th>
+                    <td mat-cell *matCellDef="let element">{{element.startDateTime | formatMediumDatetime}}</td>
+                </ng-container> -->
+
+        <!-- Priority Column -->
+        <!-- <ng-container matColumnDef="endDateTime">
+                    <th mat-header-cell *matHeaderCellDef>endDateTime</th>
                     <td mat-cell *matCellDef="let element">
-                        <span class="badge fw-medium" *ngIf="element.status.ongoing">{{element.status.ongoing}}</span>
-                        <span class="badge pending fw-medium" *ngIf="element.status.pending">{{element.status.pending}}</span>
-                        <span class="badge completed fw-medium" *ngIf="element.status.completed">{{element.status.completed}}</span>
+                        <span class="badge completed fw-medium">{{element.endDateTime | formatMediumDatetime}}</span>
                     </td>
-                </ng-container>
+                </ng-container> -->
 
-                <!-- Completion Column -->
-                <ng-container matColumnDef="completion">
-                    <th mat-header-cell *matHeaderCellDef>Completion</th>
-                    <td mat-cell *matCellDef="let element">{{element.completion}}</td>
-                </ng-container>
+        <!-- Priority Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="badge completed fw-medium">{{ element.status }}</span>
+          </td>
+        </ng-container>
 
-                <!-- Priority Column -->
-                <ng-container matColumnDef="priority">
-                    <th mat-header-cell *matHeaderCellDef>Priority</th>
-                    <td mat-cell *matCellDef="let element">
-                        <span class="badge completed fw-medium">{{element.priority}}</span>
-                    </td>
-                </ng-container>
+        <!-- Priority Column -->
+        <ng-container matColumnDef="dueDate">
+          <th mat-header-cell *matHeaderCellDef>Due Date</th>
+          <td mat-cell *matCellDef="let element">
+            <span class="badge completed fw-medium">{{ element.dueDate }}</span>
+          </td>
+        </ng-container>
 
-                <!-- Action Column -->
-                <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef>Action</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="actionMenu">
-                            <i class="{{element.action}}"></i>
-                        </button>
-                        <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
-                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
-                                <i class="ri-share-line"></i> Share
-                            </button>
-                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
-                                <i class="ri-edit-line"></i> Rename
-                            </button>
-                            <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
-                                <i class="ri-delete-bin-line"></i> Remove
-                            </button>
-                        </mat-menu>
-                    </td>
-                </ng-container>
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef class="text-start">assigned</th>
+          <td mat-cell *matCellDef="let element" class="text-start">
+            <div class="d-flex align-items-center name-info">
+              <!-- <mat-checkbox></mat-checkbox> -->
+              <!-- <a routerLink="/task-details"> -->
+              {{ element.user.login }}
+              <!-- </a> -->
+            </div>
+          </td>
+        </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                
-            </table>
-            <mat-paginator
-                [pageSizeOptions]="[10, 20, 30, 40]"
-                showFirstLastButtons
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              type="button"
+              mat-button
+              class="position-relative dot-btn p-0 bg-transparent border-none"
+              [matMenuTriggerFor]="actionMenu"
             >
-            </mat-paginator>
-        </div>
-    </mat-card-content>
+              <i class="{{ element.action }}"></i>
+            </button>
+            <mat-menu #actionMenu="matMenu" class="dotMenu two monthMenu" xPosition="before">
+              <!-- <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                                <i class="ri-share-line"></i> Share
+                            </button> -->
+              <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                <i class="ri-edit-line"></i> Rename
+              </button>
+              <button mat-menu-item type="button" class="bg-transparent border-none position-relative">
+                <i class="ri-delete-bin-line"></i> Remove
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30, 40]" showFirstLastButtons> </mat-paginator>
+    </div>
+  </mat-card-content>
 </mat-card>
