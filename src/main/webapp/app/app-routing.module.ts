@@ -144,7 +144,6 @@ import { HelpDeskComponent } from './components/dashboard/help-desk/help-desk.co
 import { SaasAppComponent } from './components/dashboard/saas-app/saas-app.component';
 import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.component';
 
-
 @NgModule({
   imports: [
     RouterModule.forRoot(
@@ -180,6 +179,10 @@ import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.
           path: 'authentication/login',
           component: LoginComponent,
           title: 'Sign in',
+        },
+        {
+          path: 'authentication/register',
+          component: RegisterComponent,
         },
         {
           path: '',
