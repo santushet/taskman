@@ -188,6 +188,8 @@ import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.
         { path: 'authentication/forgot-password', component: ForgotPasswordComponent },
         { path: 'to-do-list', component: ToDoListComponent },
         { path: 'projects/users', component: PUsersComponent },
+        { path: 'projects', component: ProjectsComponent },
+        { path: 'projects/project-create', component: ProjectCreateComponent },
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(({ EntityRoutingModule }) => EntityRoutingModule),

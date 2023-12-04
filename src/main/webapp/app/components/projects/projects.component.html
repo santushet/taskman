@@ -1,51 +1,50 @@
 <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
-    <h5 class="mb-0">Departments</h5>
-    <ol class="breadcrumb mb-0 ps-0">
-        <li class="breadcrumb-item">
-            <a routerLink="/">
-                <i class="ri-home-8-line"></i>
-                Dashboard
-            </a>
-        </li>
-        <li class="breadcrumb-item fw-semibold">Projects</li>
-    </ol>
+  <h5 class="mb-0">Departments</h5>
+  <ol class="breadcrumb mb-0 ps-0">
+    <li class="breadcrumb-item">
+      <a routerLink="/">
+        <i class="ri-home-8-line"></i>
+        Dashboard
+      </a>
+    </li>
+    <li class="breadcrumb-item fw-semibold">Projects</li>
+  </ol>
 </div>
 
 <mat-card
-    class="mb-25 tagus-card"
-    [class.component-dark-theme]="themeService.isDark()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+  class="mb-25 tagus-card"
+  [class.component-dark-theme]="themeService.isDark()"
+  [class.component-rtl-enabled]="themeService.isRTLEnabled()"
 >
-    <mat-card-header>
-        <h5 class="mb-0">All Departments</h5>
-        <a mat-flat-button class="default-btn tagus" routerLink="/projects/project-create">
-            <i class="ri-add-fill"></i> Add Departments
-        </a>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="all-projects-table table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="fw-semibold main-color">Department Name</th>
-                        <th class="fw-semibold gray-color">Members</th>
-                        <th class="fw-semibold gray-color">Budget</th>
+  <mat-card-header>
+    <h5 class="mb-0">All Departments</h5>
+    <a mat-flat-button class="default-btn tagus" routerLink="/projects/project-create"> <i class="ri-add-fill"></i> Add Departments </a>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="all-projects-table table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="fw-semibold main-color">Department Id</th>
+            <th class="fw-semibold gray-color">Name</th>
+            <!-- <th class="fw-semibold gray-color">Budget</th>
                         <th class="fw-semibold gray-color">Status</th>
                         <th class="fw-semibold gray-color">Completion</th>
-                        <th class="fw-semibold gray-color">Due Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="projects-name d-flex align-items-center">
-                                <div class="img">
-                                    <img src="main/webapp/assets/img/icon/icon1.png" alt="icon1">
-                                </div>
-                                <h5 class="fw-semibold mb-0">Product UI/UX Design</h5>
-                            </div>
-                        </td>
-                        <td class="members-list">
+                        <th class="fw-semibold gray-color">Due Date</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let department of departments" data-cy="entityTable">
+            <td class="gray-color">{{ department.id }}</td>
+            <td>
+              <div class="projects-name d-flex align-items-center">
+                <div class="img">
+                  <img src="main/webapp/assets/img/icon/icon1.png" alt="icon1" />
+                </div>
+                <h5 class="fw-semibold mb-0">{{ department.departmentName }}</h5>
+              </div>
+            </td>
+            <!-- <td class="members-list">
                             <img src="main/webapp/assets/img/user/user15.jpg" class="rounded-circle" alt="user">
                             <img src="main/webapp/assets/img/user/user17.jpg" class="rounded-circle" alt="user">
                             <img src="main/webapp/assets/img/user/user16.jpg" class="rounded-circle" alt="user">
@@ -58,9 +57,9 @@
                             70%
                             <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
                         </td>
-                        <td class="gray-color">25 Feb 2023</td>
-                    </tr>
-                    <tr>
+                        <td class="gray-color">25 Feb 2023</td> -->
+          </tr>
+          <!-- <tr>
                         <td>
                             <div class="projects-name d-flex align-items-center">
                                 <div class="img">
@@ -355,9 +354,9 @@
                             <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
                         </td>
                         <td class="gray-color">20 Feb 2023</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </mat-card-content>
+                    </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
 </mat-card>
