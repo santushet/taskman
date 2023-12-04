@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20231204083812",
+  "entityTableName": "department",
+  "fields": [
+    {
+      "fieldName": "departmentName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Department",
+  "relationships": [
+    {
+      "documentation": "A relationship",
+      "otherEntityName": "employee",
+      "relationshipName": "employee",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

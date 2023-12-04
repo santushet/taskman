@@ -42,6 +42,7 @@ type TaskFormGroupContent = {
   attachment: FormControl<TaskFormRawValue['attachment']>;
   attachmentContentType: FormControl<TaskFormRawValue['attachmentContentType']>;
   user: FormControl<TaskFormRawValue['user']>;
+  employee: FormControl<TaskFormRawValue['employee']>;
 };
 
 export type TaskFormGroup = FormGroup<TaskFormGroupContent>;
@@ -81,6 +82,7 @@ export class TaskFormService {
       attachment: new FormControl(taskRawValue.attachment),
       attachmentContentType: new FormControl(taskRawValue.attachmentContentType),
       user: new FormControl(taskRawValue.user),
+      employee: new FormControl(taskRawValue.employee),
     });
   }
 

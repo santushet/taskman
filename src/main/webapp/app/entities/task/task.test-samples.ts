@@ -3,44 +3,44 @@ import dayjs from 'dayjs/esm';
 import { ITask, NewTask } from './task.model';
 
 export const sampleWithRequiredData: ITask = {
-  id: 20700,
-  title: 'why hard-to-find',
-  startDateTime: dayjs('2023-11-15T20:36'),
-  endDateTime: dayjs('2023-11-15T07:58'),
-  status: 'NOT_STARTED',
+  id: 10491,
+  title: 'correctly while who',
+  startDateTime: dayjs('2023-11-15T11:06'),
+  endDateTime: dayjs('2023-11-15T01:13'),
+  status: 'COMPLETED',
   dueDate: dayjs('2023-11-15'),
 };
 
 export const sampleWithPartialData: ITask = {
-  id: 11095,
-  title: 'oh flugelhorn behalf',
-  priority: 'LOW',
-  startDateTime: dayjs('2023-11-14T21:17'),
-  endDateTime: dayjs('2023-11-15T19:51'),
-  status: 'IN_PROGRESS',
+  id: 19485,
+  title: 'gee fondly',
+  description: 'yuck volumise versus',
+  startDateTime: dayjs('2023-11-15T13:10'),
+  endDateTime: dayjs('2023-11-15T12:25'),
+  status: 'NOT_STARTED',
   dueDate: dayjs('2023-11-15'),
   attachment: '../fake-data/blob/hipster.png',
   attachmentContentType: 'unknown',
 };
 
 export const sampleWithFullData: ITask = {
-  id: 9399,
-  title: 'globalize',
-  description: 'upright revolt',
+  id: 10500,
+  title: 'menacing however',
+  description: 'shingle yowza',
   priority: 'LOW',
-  startDateTime: dayjs('2023-11-15T05:16'),
-  endDateTime: dayjs('2023-11-15T13:21'),
-  status: 'NOT_STARTED',
+  startDateTime: dayjs('2023-11-15T04:31'),
+  endDateTime: dayjs('2023-11-15T12:00'),
+  status: 'COMPLETED',
   dueDate: dayjs('2023-11-15'),
   attachment: '../fake-data/blob/hipster.png',
   attachmentContentType: 'unknown',
 };
 
 export const sampleWithNewData: NewTask = {
-  title: 'since',
-  startDateTime: dayjs('2023-11-15T04:36'),
-  endDateTime: dayjs('2023-11-15T09:26'),
-  status: 'IN_PROGRESS',
+  title: 'temporise enthusiastically suburban',
+  startDateTime: dayjs('2023-11-14T20:43'),
+  endDateTime: dayjs('2023-11-15T09:32'),
+  status: 'COMPLETED',
   dueDate: dayjs('2023-11-15'),
   id: null,
 };

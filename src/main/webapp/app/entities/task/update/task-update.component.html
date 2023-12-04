@@ -6,12 +6,12 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <!-- <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
           <label class="form-label" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div> -->
+        </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_title">Title</label>
           <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
           <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_description">Description</label>
           <input
             type="text"
@@ -33,7 +33,7 @@
           />
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_priority">Priority</label>
           <select class="form-control" name="priority" formControlName="priority" id="field_priority" data-cy="priority">
             <option [ngValue]="null"></option>
@@ -41,7 +41,7 @@
           </select>
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_startDateTime">Start Date Time</label>
           <div class="d-flex">
             <input
@@ -54,7 +54,11 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']">
+          <div
+            *ngIf="
+              editForm.get('startDateTime')!.invalid && (editForm.get('startDateTime')!.dirty || editForm.get('startDateTime')!.touched)
+            "
+          >
             <small class="form-text text-danger" *ngIf="editForm.get('startDateTime')?.errors?.required"
               >Translation missing for entity.validation.required</small
             >
@@ -64,7 +68,7 @@
           </div>
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_endDateTime">End Date Time</label>
           <div class="d-flex">
             <input
@@ -77,7 +81,7 @@
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
-          <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']">
+          <div *ngIf="editForm.get('endDateTime')!.invalid && (editForm.get('endDateTime')!.dirty || editForm.get('endDateTime')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('endDateTime')?.errors?.required"
               >Translation missing for entity.validation.required</small
             >
@@ -100,19 +104,10 @@
           </div>
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_dueDate">Due Date</label>
           <div class="input-group">
-            <!-- <input
-              id="field_dueDate"
-              data-cy="dueDate"
-              type="text"
-              class="form-control"
-              name="dueDate"
-              ngbDatepicker
-              #dueDateDp="ngbDatepicker"
-              formControlName="dueDate"
-            /> -->
+            <input id="field_dueDate" data-cy="dueDate" type="text" class="form-control" name="dueDate" formControlName="dueDate" />
             <!-- <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button> -->
           </div>
           <div *ngIf="editForm.get('dueDate')!.invalid && (editForm.get('dueDate')!.dirty || editForm.get('dueDate')!.touched)">
@@ -122,7 +117,7 @@
           </div>
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_attachment">Attachment</label>
           <div>
             <img
@@ -168,11 +163,26 @@
           />
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" class="mb-3">
+        <div class="mb-3">
           <label class="form-label" for="field_user">User</label>
           <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
             <option [ngValue]="null"></option>
             <option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_employee">Employee</label>
+          <select
+            class="form-control"
+            id="field_employee"
+            data-cy="employee"
+            name="employee"
+            formControlName="employee"
+            [compareWith]="compareEmployee"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="employeeOption" *ngFor="let employeeOption of employeesSharedCollection">{{ employeeOption.id }}</option>
           </select>
         </div>
       </div>

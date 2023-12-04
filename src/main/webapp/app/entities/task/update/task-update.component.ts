@@ -12,18 +12,19 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
+import { IEmployee } from 'app/entities/employee/employee.model';
+import { EmployeeService } from 'app/entities/employee/service/employee.service';
 import { priority } from 'app/entities/enumerations/priority.model';
 import { status } from 'app/entities/enumerations/status.model';
 import { TaskService } from '../service/task.service';
 import { ITask } from '../task.model';
 import { TaskFormService, TaskFormGroup } from './task-form.service';
-import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 
 @Component({
   standalone: true,
   selector: 'jhi-task-update',
   templateUrl: './task-update.component.html',
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, HasAnyAuthorityDirective],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class TaskUpdateComponent implements OnInit {
   isSaving = false;
@@ -32,6 +33,7 @@ export class TaskUpdateComponent implements OnInit {
   statusValues = Object.keys(status);
 
   usersSharedCollection: IUser[] = [];
+  employeesSharedCollection: IEmployee[] = [];
 
   editForm: TaskFormGroup = this.taskFormService.createTaskFormGroup();
 
@@ -41,11 +43,14 @@ export class TaskUpdateComponent implements OnInit {
     protected taskService: TaskService,
     protected taskFormService: TaskFormService,
     protected userService: UserService,
+    protected employeeService: EmployeeService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
   ) {}
 
   compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
+
+  compareEmployee = (o1: IEmployee | null, o2: IEmployee | null): boolean => this.employeeService.compareEmployee(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ task }) => {
@@ -121,6 +126,10 @@ export class TaskUpdateComponent implements OnInit {
     this.taskFormService.resetForm(this.editForm, task);
 
     this.usersSharedCollection = this.userService.addUserToCollectionIfMissing<IUser>(this.usersSharedCollection, task.user);
+    this.employeesSharedCollection = this.employeeService.addEmployeeToCollectionIfMissing<IEmployee>(
+      this.employeesSharedCollection,
+      task.employee,
+    );
   }
 
   protected loadRelationshipsOptions(): void {
@@ -129,5 +138,13 @@ export class TaskUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing<IUser>(users, this.task?.user)))
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+
+    this.employeeService
+      .query()
+      .pipe(map((res: HttpResponse<IEmployee[]>) => res.body ?? []))
+      .pipe(
+        map((employees: IEmployee[]) => this.employeeService.addEmployeeToCollectionIfMissing<IEmployee>(employees, this.task?.employee)),
+      )
+      .subscribe((employees: IEmployee[]) => (this.employeesSharedCollection = employees));
   }
 }

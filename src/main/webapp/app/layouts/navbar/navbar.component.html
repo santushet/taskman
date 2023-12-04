@@ -1,4 +1,4 @@
-<!-- <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
@@ -27,7 +27,7 @@
             </span>
           </a>
         </li>
-
+        <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li
           *ngSwitchCase="true"
           ngbDropdown
@@ -55,7 +55,31 @@
                 <span>Task</span>
               </a>
             </li>
-          
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/department"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Department</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/employee"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span>Employee</span>
+              </a>
+            </li>
+            <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
           </ul>
         </li>
         <li
@@ -109,7 +133,7 @@
                 <span>API</span>
               </a>
             </li>
-           
+            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
           </ul>
         </li>
         <li
@@ -182,4 +206,4 @@
       </ul>
     </div>
   </div>
-</nav> -->
+</nav>

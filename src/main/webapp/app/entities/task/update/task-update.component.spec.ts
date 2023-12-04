@@ -8,9 +8,10 @@ import { of, Subject, from } from 'rxjs';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
-import { TaskService } from '../service/task.service';
+import { IEmployee } from 'app/entities/employee/employee.model';
+import { EmployeeService } from 'app/entities/employee/service/employee.service';
 import { ITask } from '../task.model';
-
+import { TaskService } from '../service/task.service';
 import { TaskFormService } from './task-form.service';
 
 import { TaskUpdateComponent } from './task-update.component';
@@ -22,6 +23,7 @@ describe('Task Management Update Component', () => {
   let taskFormService: TaskFormService;
   let taskService: TaskService;
   let userService: UserService;
+  let employeeService: EmployeeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,6 +46,7 @@ describe('Task Management Update Component', () => {
     taskFormService = TestBed.inject(TaskFormService);
     taskService = TestBed.inject(TaskService);
     userService = TestBed.inject(UserService);
+    employeeService = TestBed.inject(EmployeeService);
 
     comp = fixture.componentInstance;
   });
@@ -51,10 +54,10 @@ describe('Task Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call User query and add missing value', () => {
       const task: ITask = { id: 456 };
-      const user: IUser = { id: 6276 };
+      const user: IUser = { id: 2633 };
       task.user = user;
 
-      const userCollection: IUser[] = [{ id: 5814 }];
+      const userCollection: IUser[] = [{ id: 27650 }];
       jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
       const additionalUsers = [user];
       const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
@@ -71,15 +74,40 @@ describe('Task Management Update Component', () => {
       expect(comp.usersSharedCollection).toEqual(expectedCollection);
     });
 
+    it('Should call Employee query and add missing value', () => {
+      const task: ITask = { id: 456 };
+      const employee: IEmployee = { id: 27003 };
+      task.employee = employee;
+
+      const employeeCollection: IEmployee[] = [{ id: 17852 }];
+      jest.spyOn(employeeService, 'query').mockReturnValue(of(new HttpResponse({ body: employeeCollection })));
+      const additionalEmployees = [employee];
+      const expectedCollection: IEmployee[] = [...additionalEmployees, ...employeeCollection];
+      jest.spyOn(employeeService, 'addEmployeeToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ task });
+      comp.ngOnInit();
+
+      expect(employeeService.query).toHaveBeenCalled();
+      expect(employeeService.addEmployeeToCollectionIfMissing).toHaveBeenCalledWith(
+        employeeCollection,
+        ...additionalEmployees.map(expect.objectContaining),
+      );
+      expect(comp.employeesSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const task: ITask = { id: 456 };
-      const user: IUser = { id: 24673 };
+      const user: IUser = { id: 24415 };
       task.user = user;
+      const employee: IEmployee = { id: 12668 };
+      task.employee = employee;
 
       activatedRoute.data = of({ task });
       comp.ngOnInit();
 
       expect(comp.usersSharedCollection).toContain(user);
+      expect(comp.employeesSharedCollection).toContain(employee);
       expect(comp.task).toEqual(task);
     });
   });
@@ -160,6 +188,16 @@ describe('Task Management Update Component', () => {
         jest.spyOn(userService, 'compareUser');
         comp.compareUser(entity, entity2);
         expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
+    describe('compareEmployee', () => {
+      it('Should forward to employeeService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(employeeService, 'compareEmployee');
+        comp.compareEmployee(entity, entity2);
+        expect(employeeService.compareEmployee).toHaveBeenCalledWith(entity, entity2);
       });
     });
   });

@@ -1,5 +1,6 @@
 package com.tm.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tm.app.domain.enumeration.priority;
 import com.tm.app.domain.enumeration.status;
 import jakarta.persistence.*;
@@ -63,6 +64,10 @@ public class Task implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "tasks", "manager", "department" }, allowSetters = true)
+    private Employee employee;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -206,6 +211,19 @@ public class Task implements Serializable {
 
     public Task user(User user) {
         this.setUser(user);
+        return this;
+    }
+
+    public Employee getEmployee() {
+        return this.employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Task employee(Employee employee) {
+        this.setEmployee(employee);
         return this;
     }
 

@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20231204084012",
+  "documentation": "The Employee entity.",
+  "entityTableName": "employee",
+  "fields": [
+    {
+      "documentation": "The firstname attribute.",
+      "fieldName": "firstName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hireDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Employee",
+  "relationships": [
+    {
+      "otherEntityName": "task",
+      "relationshipName": "task",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "employee",
+      "relationshipName": "manager",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

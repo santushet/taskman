@@ -1,5 +1,6 @@
 import dayjs from 'dayjs/esm';
 import { IUser } from 'app/entities/user/user.model';
+import { IEmployee } from 'app/entities/employee/employee.model';
 import { priority } from 'app/entities/enumerations/priority.model';
 import { status } from 'app/entities/enumerations/status.model';
 
@@ -15,6 +16,7 @@ export interface ITask {
   attachment?: string | null;
   attachmentContentType?: string | null;
   user?: Pick<IUser, 'id' | 'login'> | null;
+  employee?: Pick<IEmployee, 'id'> | null;
 }
 
 export type NewTask = Omit<ITask, 'id'> & { id: null };

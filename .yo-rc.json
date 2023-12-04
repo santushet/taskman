@@ -16,7 +16,7 @@
     "enableHibernateCache": true,
     "enableSwaggerCodegen": false,
     "enableTranslation": false,
-    "entities": ["Task"],
+    "entities": ["Task", "Department", "Employee"],
     "gradleEnterpriseHost": null,
     "jhipsterVersion": "8.0.0",
     "jwtSecretKey": "Y2MwNjJlMWM5ZmY4ZjYwOTIyYzJlNzYzOWFlZGE1YmZiMTU3MWYxZThlNDU1MGZiZGJhMDY3YjVjYTVhMTBmODUwOTA1YzM5N2E5Njk2YjMwNTg3MjA4ODRmNjcwYTNhMzYwNGMxMzE3YjA2ZTUwNGFjY2NlYmEzOTM1NzM4NjI=",

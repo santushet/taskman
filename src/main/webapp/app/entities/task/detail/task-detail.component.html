@@ -55,6 +55,12 @@
         <dd>
           <span>{{ task.user?.login }}</span>
         </dd>
+        <dt><span>Employee</span></dt>
+        <dd>
+          <div *ngIf="task.employee">
+            <a [routerLink]="['/employee', task.employee.id, 'view']">{{ task.employee.id }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
@@ -62,7 +68,7 @@
       </button>
 
       <button type="button" [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary">
-        <!-- <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span> -->
+        <!-- <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Translation missing for entity.action.edit</span> -->
       </button>
     </div>
   </div>

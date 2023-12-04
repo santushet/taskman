@@ -1,5 +1,6 @@
 package com.tm.app.domain;
 
+import static com.tm.app.domain.EmployeeTestSamples.*;
 import static com.tm.app.domain.TaskTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,5 +21,17 @@ class TaskTest {
 
         task2 = getTaskSample2();
         assertThat(task1).isNotEqualTo(task2);
+    }
+
+    @Test
+    void employeeTest() throws Exception {
+        Task task = getTaskRandomSampleGenerator();
+        Employee employeeBack = getEmployeeRandomSampleGenerator();
+
+        task.setEmployee(employeeBack);
+        assertThat(task.getEmployee()).isEqualTo(employeeBack);
+
+        task.employee(null);
+        assertThat(task.getEmployee()).isNull();
     }
 }

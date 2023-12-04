@@ -29,6 +29,7 @@ describe('Task Form Service', () => {
             dueDate: expect.any(Object),
             attachment: expect.any(Object),
             user: expect.any(Object),
+            employee: expect.any(Object),
           }),
         );
       });
@@ -48,6 +49,7 @@ describe('Task Form Service', () => {
             dueDate: expect.any(Object),
             attachment: expect.any(Object),
             user: expect.any(Object),
+            employee: expect.any(Object),
           }),
         );
       });
