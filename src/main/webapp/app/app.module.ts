@@ -7,7 +7,7 @@ import { TitleStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import dayjs from 'dayjs/esm';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { DatePipe } from '@angular/common';
@@ -17,7 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -60,7 +60,6 @@ import { QuillModule } from 'ngx-quill';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import './config/dayjs';
@@ -429,9 +428,9 @@ import { SaStatsComponent } from './components/dashboard/saas-app/sa-stats/sa-st
 import { SaRevenueSummaryComponent } from './components/dashboard/saas-app/sa-revenue-summary/sa-revenue-summary.component';
 import { SaSalesAnalyticsComponent } from './components/dashboard/saas-app/sa-sales-analytics/sa-sales-analytics.component';
 import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.component';
+import { AddTaskDialogBox } from './components/apps/to-do-list/add-taskdialog.component';
 
 // import { DashboardComponent } from './components/dashboard/dashboard.component';
-
 
 @NgModule({
   declarations: [
@@ -797,7 +796,8 @@ import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.
     SaRevenueSummaryComponent,
     SaSalesAnalyticsComponent,
     ComingSoonComponent,
-],
+    AddTaskDialogBox,
+  ],
   imports: [
     BrowserModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
@@ -806,68 +806,63 @@ import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
     MatMenuModule,
-        MatCardModule,
-        MatTableModule,
-        MatPaginatorModule,
-        BrowserAnimationsModule,
-        NgApexchartsModule,
-        MatProgressBarModule,
-        MatButtonModule,
-        MatAutocompleteModule,
-        MatBadgeModule,
-        MatBottomSheetModule,
-        MatButtonToggleModule,
-        MatCheckboxModule,
-        MatChipsModule,
-        MatDatepickerModule,
-        MatDialogModule,
-        MatDividerModule,
-        MatExpansionModule,
-        MatFormFieldModule,
-        MatGridListModule,
-        MatIconModule,
-        MatInputModule,
-        MatListModule,
-        MatProgressSpinnerModule,
-        MatRadioModule,
-        MatRippleModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatSlideToggleModule,
-        MatSliderModule,
-        MatSnackBarModule,
-        MatSortModule,
-        MatStepperModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        MatTreeModule,
-        NgScrollbarModule,
-        FormsModule,
-        FullCalendarModule,
-        MatNativeDateModule ,
-        ReactiveFormsModule,
-        CarouselModule,
-        NgxEditorModule,
-        DragDropModule,
-        HttpClientModule,
-        CdkAccordionModule,
-        NgxEchartsModule.forRoot({
-            echarts: () => import('echarts')
-        }),
-        NgxGaugeModule,
-        NgChartsModule,
-        NgxMatTimepickerModule,
-        QuillModule.forRoot(),
-        NgxDropzoneModule,
-        ColorPickerModule
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    NgApexchartsModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
+    NgScrollbarModule,
+    FormsModule,
+    FullCalendarModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    CarouselModule,
+    NgxEditorModule,
+    DragDropModule,
+    HttpClientModule,
+    CdkAccordionModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+    NgxGaugeModule,
+    NgChartsModule,
+    NgxMatTimepickerModule,
+    QuillModule.forRoot(),
+    NgxDropzoneModule,
+    ColorPickerModule,
   ],
-  providers: [
-    Title,
-    { provide: LOCALE_ID, useValue: 'en' },
-    httpInterceptorProviders,
-    DatePipe
-  ],
+  providers: [Title, { provide: LOCALE_ID, useValue: 'en' }, httpInterceptorProviders, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {

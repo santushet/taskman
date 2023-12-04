@@ -1,70 +1,110 @@
 <div class="create-dialog-box scrollable-dialog">
-    <div class="title d-flex align-items-center justify-content-space-between">
-        <h4 class="mb-0">Add New Task</h4>
-        <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
-    </div>
-    <form>
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Task Title</label>
-                    <input type="text" class="input-control" placeholder="Task *">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
+  <div class="title d-flex align-items-center justify-content-space-between">
+    <h4 class="mb-0">Add New Task</h4>
+    <button class="close-btn bg-transparent p-0 border-none" (click)="close()"><i class="flaticon-close"></i></button>
+  </div>
+  <form>
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label class="d-block fw-semibold">Task Title</label>
+          <input type="text" class="input-control" placeholder="Task *" />
+        </div>
+      </div>
+      <!-- <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                     <label class="d-block fw-semibold">Assigned to</label>
                     <input type="text" class="input-control" placeholder="Assigned to *">
                 </div>
-            </div>
-            <div class="col-lg-12 col-md-12">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Description</label>
-                    <input type="text" class="input-control" placeholder="Description *">
-                </div>
-            </div>
+            </div> -->
+      <div class="col-lg-6 col-md-6">
+        <div class="tagus-form-group without-icon">
+          <label class="d-block mb-12 fw-semibold gray-color">Assigned to</label>
+          <mat-form-field appearance="fill">
+            <mat-label>Assigned to</mat-label>
+            <mat-select>
+              <!-- <mat-option [ngValue]="null"></mat-option> -->
+              -->
+              <!-- <mat-option value="1">IN_PROGRESS</mat-option> -->
+              <!-- <mat-option [ngValue]="userOption" *ngFor="let userOption of usersSharedCollection">{{ userOption.login }}</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12">
+        <div class="form-group">
+          <label class="d-block fw-semibold">Description</label>
+          <input type="text" class="input-control" placeholder="Description *" />
+        </div>
+      </div>
 
-           
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Member</label>
-                    <input type="file" class="input-control">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Start Date</label>
-                    <input type="date" class="input-control">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">End Date</label>
-                    <input type="date" class="input-control">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Status</label>
-                    <input type="text" class="input-control" placeholder="Status *">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                    <label class="d-block fw-semibold">Completion</label>
-                    <input type="text" class="input-control" placeholder="0/10 *">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label class="d-block fw-semibold">Start Date</label>
+          <input type="date" class="input-control" />
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label class="d-block fw-semibold">End Date</label>
+          <input type="date" class="input-control" />
+        </div>
+      </div>
+
+      <!-- <div class="col-lg-6 col-md-6">
                 <div class="form-group">
                     <label class="d-block fw-semibold">Priority</label>
                     <input type="text" class="input-control" placeholder="High/Medium/Low *">
                 </div>
-            </div>
+            </div> -->
+      <div class="col-lg-6 col-md-6">
+        <div class="tagus-form-group without-icon">
+          <label class="d-block mb-12 fw-semibold gray-color">Priority</label>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter priority</mat-label>
+            <mat-select>
+              <mat-option value="1">High</mat-option>
+              <mat-option value="2">Medium</mat-option>
+              <mat-option value="3">Low</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        <div class="text-end">
-            <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
-            <button type="submit"><i class="ri-add-fill"></i> Add New Task</button>
+      </div>
+      <!-- <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Status</label>
+                    <input type="text" class="input-control" placeholder="Status *">
+                </div>
+            </div> -->
+      <div class="col-lg-6 col-md-6">
+        <div class="tagus-form-group without-icon">
+          <label class="d-block mb-12 fw-semibold gray-color">Status</label>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter status</mat-label>
+            <mat-select>
+              <mat-option value="1">IN_PROGRESS</mat-option>
+              <mat-option value="2">PENDING</mat-option>
+              <mat-option value="3">COMPLETED</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-    </form>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label class="d-block fw-semibold">Upload Files</label>
+          <input type="file" class="input-control" />
+        </div>
+      </div>
+      <!-- <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label class="d-block fw-semibold">Completion</label>
+                    <input type="text" class="input-control" placeholder="0/10 *">
+                </div>
+            </div> -->
+    </div>
+    <div class="text-end">
+      <button type="button" class="gray" (click)="close()"><i class="ri-close-fill"></i> Cancel</button>
+      <button type="submit"><i class="ri-add-fill"></i> Add New Task</button>
+    </div>
+  </form>
 </div>
