@@ -51,7 +51,6 @@ public class Task implements Serializable {
     @Column(name = "status", nullable = false)
     private status status;
 
-    @NotNull
     @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
