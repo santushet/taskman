@@ -14,7 +14,6 @@ import { UserService } from 'app/entities/user/user.service';
 
 import { EntityArrayResponseType, TaskService } from './task.service';
 import { ITask } from './task.model';
-import { AddTaskDialogBox } from './add-taskdialog.component';
 
 @Component({
   selector: 'app-to-do-list',
@@ -24,13 +23,13 @@ import { AddTaskDialogBox } from './add-taskdialog.component';
 export class ToDoListComponent {
   usersSharedCollection: IUser[] = [];
 
-  openAddTaskDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(AddTaskDialogBox, {
-      width: '600px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-  }
+  // openAddTaskDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  //   this.dialog.open(AddTaskDialogBox, {
+  //     width: '600px',
+  //     enterAnimationDuration,
+  //     exitAnimationDuration,
+  //   });
+  // }
 
   ongoing = true;
   pending = true;

@@ -143,6 +143,7 @@ import { CryptoComponent } from './components/dashboard/crypto/crypto.component'
 import { HelpDeskComponent } from './components/dashboard/help-desk/help-desk.component';
 import { SaasAppComponent } from './components/dashboard/saas-app/saas-app.component';
 import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.component';
+import { TaskCreateComponent } from './components/apps/to-do-list/create/task-create.component';
 
 @NgModule({
   imports: [
@@ -190,6 +191,7 @@ import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.
         { path: 'projects/users', component: PUsersComponent },
         { path: 'projects', component: ProjectsComponent },
         { path: 'projects/project-create', component: ProjectCreateComponent },
+        { path: 'to-do-list/create', component: TaskCreateComponent },
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(({ EntityRoutingModule }) => EntityRoutingModule),
