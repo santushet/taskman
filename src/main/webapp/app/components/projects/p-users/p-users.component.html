@@ -7,7 +7,7 @@
         Dashboard
       </a>
     </li>
-    <li class="breadcrumb-item gray-color">Projects</li>
+    <!-- <li class="breadcrumb-item gray-color">Projects</li> -->
     <li class="breadcrumb-item fw-semibold">Employee</li>
   </ol>
 </div>
@@ -15,9 +15,10 @@
 <mat-card class="mb-25 tagus-card">
   <mat-card-header>
     <h5 class="mb-0">Employee List</h5>
-    <button mat-flat-button class="default-btn tagus" (click)="openCreateUserDialog('300ms', '100ms')">
+    <!-- <button mat-flat-button class="default-btn tagus" (click)="openCreateUserDialog('300ms', '100ms')">
       <i class="ri-add-fill"></i> Create Employee
-    </button>
+    </button> -->
+    <a mat-flat-button class="default-btn tagus" routerLink="/users/create"> <i class="ri-add-fill"></i> Add User </a>
   </mat-card-header>
   <mat-card-content>
     <div class="teamMembersListTable tagus-mat-table mat-elevation-z8">

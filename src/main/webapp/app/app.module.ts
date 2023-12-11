@@ -429,6 +429,7 @@ import { SaRevenueSummaryComponent } from './components/dashboard/saas-app/sa-re
 import { SaSalesAnalyticsComponent } from './components/dashboard/saas-app/sa-sales-analytics/sa-sales-analytics.component';
 import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.component';
 import { TaskCreateComponent } from './components/apps/to-do-list/create/task-create.component';
+import { CreateUserComponent } from './components/projects/p-users/create/create-user.component';
 
 // import { DashboardComponent } from './components/dashboard/dashboard.component';
 
@@ -797,6 +798,7 @@ import { TaskCreateComponent } from './components/apps/to-do-list/create/task-cr
     SaSalesAnalyticsComponent,
     ComingSoonComponent,
     TaskCreateComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,

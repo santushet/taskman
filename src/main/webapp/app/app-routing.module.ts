@@ -144,6 +144,7 @@ import { HelpDeskComponent } from './components/dashboard/help-desk/help-desk.co
 import { SaasAppComponent } from './components/dashboard/saas-app/saas-app.component';
 import { ComingSoonComponent } from './components/pages/coming-soon/coming-soon.component';
 import { TaskCreateComponent } from './components/apps/to-do-list/create/task-create.component';
+import { CreateUserComponent } from './components/projects/p-users/create/create-user.component';
 
 @NgModule({
   imports: [
@@ -188,10 +189,13 @@ import { TaskCreateComponent } from './components/apps/to-do-list/create/task-cr
         { path: 'authentication/reset-password', component: ResetPasswordComponent },
         { path: 'authentication/forgot-password', component: ForgotPasswordComponent },
         { path: 'to-do-list', component: ToDoListComponent },
-        { path: 'projects/users', component: PUsersComponent },
+        { path: 'users', component: PUsersComponent },
+        { path: 'users/create', component: CreateUserComponent },
         { path: 'projects', component: ProjectsComponent },
         { path: 'projects/project-create', component: ProjectCreateComponent },
         { path: 'to-do-list/create', component: TaskCreateComponent },
+        { path: 'calendar', component: CalendarComponent },
+        { path: 'projects/team', component: PTeamComponent },
         {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(({ EntityRoutingModule }) => EntityRoutingModule),

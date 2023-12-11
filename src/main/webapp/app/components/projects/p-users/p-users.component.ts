@@ -23,9 +23,9 @@ export class PUsersComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  // }
 
   active = true;
   inactive = true;
@@ -39,13 +39,13 @@ export class PUsersComponent implements OnInit {
     this.load();
   }
 
-  openCreateUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(CreateUserDialogBox, {
-      width: '600px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-  }
+  // openCreateUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  //   this.dialog.open(CreateUserDialogBox, {
+  //     width: '600px',
+  //     enterAnimationDuration,
+  //     exitAnimationDuration,
+  //   });
+  // }
 
   load(): void {
     this.isLoading = true;
@@ -300,15 +300,3 @@ export class PUsersComponent implements OnInit {
 //         action: 'ri-more-fill'
 //     },
 // ];
-
-@Component({
-  selector: 'create-user-dialog',
-  templateUrl: './create-user-dialog.html',
-})
-export class CreateUserDialogBox {
-  constructor(public dialogRef: MatDialogRef<CreateUserDialogBox>) {}
-
-  close() {
-    this.dialogRef.close(true);
-  }
-}

@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { status } from 'app/entities/enumerations/status.model';
 
 import { UserService } from 'app/entities/user/user.service';
 import { finalize, map } from 'rxjs/operators';
@@ -19,6 +20,9 @@ export class TaskCreateComponent implements OnInit {
   isSaving = false;
   task: ITask | null = null;
   usersSharedCollection: IUser[] = [];
+
+  statusValues = Object.keys(status);
+
   editForm: TaskFormGroup = this.taskFormService.createTaskFormGroup();
 
   constructor(
@@ -29,7 +33,7 @@ export class TaskCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadRelationshipsOptions();
+    // this.loadRelationshipsOptions();
   }
 
   protected loadRelationshipsOptions(): void {

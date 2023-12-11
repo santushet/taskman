@@ -41,21 +41,29 @@
               <label class="d-block mb-12 fw-semibold gray-color">Description</label>
               <mat-form-field appearance="fill">
                 <i class="ri-edit-2-line"></i>
-                <mat-label for="field_title">Description</mat-label>
+                <mat-label for="field_description">Description</mat-label>
                 <input matInput type="text" class="form-control" name="description" id="field_description" formControlName="description" />
               </mat-form-field>
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-6">
-              <label class="d-block mb-12 fw-semibold gray-color">Start Date</label>
+              <label class="d-block mb-12 fw-semibold gray-color">Due Date</label>
               <mat-form-field appearance="fill" class="date-input">
-                <mat-label>MM/DD/YYYY</mat-label>
-                <input matInput [matDatepicker]="picker" />
+                <mat-label for="field_dueDate">MM/DD/YYYY</mat-label>
+                <input
+                  matInput
+                  id="field_dueDate"
+                  data-cy="dueDate"
+                  type="datetime-local"
+                  class="form-control"
+                  name="dueDate"
+                  formControlName="dueDate"
+                />
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
               <label class="d-block mb-12 fw-semibold gray-color">End Date</label>
               <mat-form-field appearance="fill" class="date-input">
                 <mat-label>MM/DD/YYYY</mat-label>
@@ -63,8 +71,30 @@
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-            </div>
+            </div> -->
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+              <label class="d-block mb-12 fw-semibold gray-color">Deadline</label>
+              <mat-form-field appearance="fill" class="date-input">
+                <mat-label for="field_dueDate">MM/DD/YYYY</mat-label>
+                <input matInput 
+                id="field_dueDate" data-cy="dueDate" type="text" class="form-control" name="dueDate" formControlName="dueDate" />
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div> -->
           </div>
+
+          <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+            <label class="d-block mb-12 fw-semibold gray-color">Status</label>
+            <mat-form-field appearance="fill">
+              <mat-label for="field_status">Status</mat-label>
+              <i class="ri-equalizer-line"></i>
+              <mat-select name="status" formControlName="status" id="field_status" data-cy="status"> -->
+          <!-- <mat-option [ngValue]="null"></mat-option> -->
+          <!-- <mat-option *ngFor="let status of statusValues" [value]="status">{{ status }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
           <button mat-button type="submit" class="default-btn mt-25">Create Task</button>
         </form>
       </mat-card-content>
@@ -90,24 +120,27 @@
         </form>
       </mat-card-content>
     </mat-card>
-    <!-- <mat-card class="mb-25 create-project-card tagus-card">
+    <mat-card class="mb-25 create-project-card tagus-card">
       <mat-card-header class="border-bottom">
         <h5 class="mb-0">Tags</h5>
       </mat-card-header>
       <mat-card-content>
         <form>
-          <label class="d-block mb-12 fw-semibold gray-color">Categories</label>
+          <label class="d-block mb-12 fw-semibold gray-color">Status</label>
           <mat-form-field appearance="fill">
-            <i class="ri-price-tag-3-line"></i>
-            <mat-label>Categories</mat-label>
-            <mat-select [formControl]="categories" multiple>
-              <mat-option *ngFor="let category of categoriesList" [value]="category">{{ category }}</mat-option>
+            <mat-label for="field_status">Status</mat-label>
+            <i class="ri-equalizer-line"></i>
+            <mat-select name="status" formControlName="status" id="field_status" data-cy="status">
+              <!-- <mat-option [ngValue]="null"></mat-option> -->
+              <mat-option *ngFor="let status of statusValues" [value]="status">{{ status }}</mat-option>
+              <!-- <mat-option value="COMPLETED">COMPLETED</mat-option> -->
+              <!-- <mat-option value="NOT_STARTED">NOT_STARTED</mat-option> -->
             </mat-select>
           </mat-form-field>
         </form>
       </mat-card-content>
     </mat-card>
-    <mat-card class="mb-25 create-project-card tagus-card">
+    <!--   <mat-card class="mb-25 create-project-card tagus-card">
       <mat-card-header class="border-bottom">
         <h5 class="mb-0">Members</h5>
       </mat-card-header>

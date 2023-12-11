@@ -78,7 +78,6 @@
               class="form-control"
               name="endDateTime"
               formControlName="endDateTime"
-              placeholder="YYYY-MM-DD HH:mm"
             />
           </div>
           <div *ngIf="editForm.get('endDateTime')!.invalid && (editForm.get('endDateTime')!.dirty || editForm.get('endDateTime')!.touched)">
@@ -94,7 +93,7 @@
         <div class="mb-3">
           <label class="form-label" for="field_status">Status</label>
           <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
-            <option [ngValue]="null"></option>
+            <!-- <option [ngValue]="null"></option> -->
             <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
           </select>
           <div *ngIf="editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)">
@@ -103,19 +102,19 @@
             >
           </div>
         </div>
-
+        <!-- 
         <div class="mb-3">
           <label class="form-label" for="field_dueDate">Due Date</label>
           <div class="input-group">
-            <input id="field_dueDate" data-cy="dueDate" type="text" class="form-control" name="dueDate" formControlName="dueDate" />
-            <!-- <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button> -->
-          </div>
+            <input id="field_dueDate" data-cy="dueDate" type="text" class="form-control" name="dueDate" formControlName="dueDate" /> -->
+        <!-- <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button> -->
+        <!-- </div>
           <div *ngIf="editForm.get('dueDate')!.invalid && (editForm.get('dueDate')!.dirty || editForm.get('dueDate')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('dueDate')?.errors?.required"
               >Translation missing for entity.validation.required</small
             >
           </div>
-        </div>
+        </div> -->
 
         <div class="mb-3">
           <label class="form-label" for="field_attachment">Attachment</label>
