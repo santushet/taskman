@@ -46,7 +46,7 @@ public class Task implements Serializable {
     @Column(name = "end_date_time", nullable = false)
     private ZonedDateTime endDateTime;
 
-    @NotNull
+    //    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private status status;
