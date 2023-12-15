@@ -360,6 +360,9 @@
                         Enable the line below to have remote debugging of your application on port 5005
                         <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
                         -->
+                        <embeddedLaunchScriptProperties>
+                            <mode>service</mode>
+                        </embeddedLaunchScriptProperties>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -831,9 +834,12 @@
                 <!-- default Spring profiles -->
                 <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
                 <profile.test>testdev</profile.test>
-                <liquibase-plugin.url>jdbc:mysql://localhost:3306/TaskManager</liquibase-plugin.url>
+<!--                <liquibase-plugin.url>jdbc:mysql://localhost:3306/TaskManager</liquibase-plugin.url>-->
+                <liquibase-plugin.url>jdbc:mysql://taskmanager.cmd0wu4iwo4r.ap-south-1.rds.amazonaws.com:3306/taskmanager</liquibase-plugin.url>
+<!--                <liquibase-plugin.username>root</liquibase-plugin.username>-->
+<!--                <liquibase-plugin.password>Unst0pp@ble</liquibase-plugin.password>-->
                 <liquibase-plugin.username>root</liquibase-plugin.username>
-                <liquibase-plugin.password>Unst0pp@ble</liquibase-plugin.password>
+                <liquibase-plugin.password>root1234</liquibase-plugin.password>
             </properties>
             <dependencies>
                 <dependency>
